@@ -8,7 +8,7 @@
   <title>SlickGrid example 1: Basic grid (RTL)</title>
   <link rel="stylesheet" href="../dist/styles/css/example-demo.css" type="text/css" />
   <link rel="stylesheet" href="../dist/styles/css/slick-alpine-theme.css" type="text/css" />
-  </head>
+</head>
 
 <body>
   <h2 class="title">Example 1 Simple Grid (RTL) - ESM</h2>
@@ -27,6 +27,7 @@
         <ul>
           <li>basic grid with minimal configuration</li>
           <li>RTL (right-to-left) support enabled</li>
+          <li>column reordering in RTL mode</li>
         </ul>
         <h2>View Source:</h2>
         <ul>
@@ -38,7 +39,8 @@
     </tr>
   </table>
 
-  <script src="https://cdn.jsdelivr.net/npm/sortablejs/Sortable.min.js"></script>
+  <!-- SortableJS RTL fork: required for column reordering in RTL mode. -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs-rtl/Sortable.min.js"></script>
   <script src="sortable-cdn-fallback.js"></script>
 
   <script src="../dist/browser/slick.core.js"></script>
@@ -49,7 +51,7 @@
     var grid;
     var columns = [
       { id: "title", name: "Title", field: "title", width: 90 },
-      { id: "duration", name: "Duration", field: "duration", with: 80 },
+      { id: "duration", name: "Duration", field: "duration", width: 80 },
       { id: "%", name: "% Complete", field: "percentComplete", width: 90 },
       { id: "start", name: "Start", field: "start", width: 80 },
       { id: "finish", name: "Finish", field: "finish", width: 80 },
@@ -64,7 +66,7 @@
 
     var options = {
       enableCellNavigation: true,
-      enableColumnReorder: false,
+      enableColumnReorder: true,
       rtl: true
     };
 

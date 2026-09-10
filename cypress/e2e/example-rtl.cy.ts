@@ -79,6 +79,29 @@ describe('Example - RTL (Right-to-Left) Support', () => {
                 .children()
                 .each(($child, index) => expect($child.text()).to.eq(titles[index]));
         });
+
+        it('should allow columns to be reordered in both directions in RTL mode', () => {
+            const reorderedTitles = [
+                'Title', '% Complete', 'Start', 'Finish', 'Duration', 'Effort Driven',
+                'Priority', 'Status', 'Assignee', 'Department', 'Project', 'Completed'
+            ];
+
+            // Move Duration after Finish
+            cy.contains('#myGrid .slick-header-column', 'Finish').then(($target) => {
+                cy.contains('#myGrid .slick-header-column', 'Duration').drag($target);
+            });
+
+            cy.get('#myGrid').find('.slick-header-columns').children()
+                .each(($child, index) => expect($child.text()).to.eq(reorderedTitles[index]));
+
+            // Move Duration back
+            cy.contains('#myGrid .slick-header-column', '% Complete').then(($target) => {
+                cy.contains('#myGrid .slick-header-column', 'Duration').drag($target);
+            });
+
+            cy.get('#myGrid').find('.slick-header-columns').children()
+                .each(($child, index) => expect($child.text()).to.eq(titles[index]));
+        });
     });
 
     // Section 4: Scrolling Behavior
